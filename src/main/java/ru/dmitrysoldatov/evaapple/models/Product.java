@@ -24,9 +24,6 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Column(name = "in_stock")
-    private Boolean inStock;
-
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Categories categories;
