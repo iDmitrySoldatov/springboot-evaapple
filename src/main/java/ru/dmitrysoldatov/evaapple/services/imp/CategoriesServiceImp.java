@@ -26,13 +26,6 @@ public class CategoriesServiceImp implements CategoriesService {
     }
 
     @Override
-    public void update(Integer id, CategoriesDTO categoriesDTO) {
-        Categories categories = converterDTO.convertToCategories(categoriesDTO);
-        categories.setId(id);
-        repository.save(categories);
-    }
-
-    @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }

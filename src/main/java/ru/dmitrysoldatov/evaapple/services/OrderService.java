@@ -5,9 +5,6 @@ import ru.dmitrysoldatov.evaapple.dto.OrderDTO;
 import java.util.List;
 
 public interface OrderService {
-
-    void update(Integer id, OrderDTO orderDTO);
-
     void deleteById(Integer id);
 
     void save(OrderDTO orderDTO);

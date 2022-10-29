@@ -22,13 +22,6 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
-    public void update(Integer id, OrderDTO orderDTO) {
-        Order order = converterDTO.convertToOrder(orderDTO);
-        order.setId(id);
-        repository.save(order);
-    }
-
-    @Override
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }

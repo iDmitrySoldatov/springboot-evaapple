@@ -27,14 +27,6 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     @Transactional
-    public void update(Integer id, ProductDTO productDTO) {
-        Product product = converterDTO.convertToProduct(productDTO);
-        product.setId(id);
-        repository.save(product);
-    }
-
-    @Override
-    @Transactional
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
