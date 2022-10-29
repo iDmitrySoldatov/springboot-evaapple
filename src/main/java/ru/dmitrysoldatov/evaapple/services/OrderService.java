@@ -7,7 +7,7 @@ import java.util.List;
 public interface OrderService {
     void deleteById(Integer id);
 
-    void save(OrderDTO orderDTO);
+    OrderDTO save(OrderDTO orderDTO);
 
     List<OrderDTO> findAll();
 

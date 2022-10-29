@@ -33,8 +33,9 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     @Transactional
-    public void save(ProductDTO productDTO) {
-        repository.save(converterDTO.convertToProduct(productDTO));
+    public ProductDTO save(ProductDTO productDTO) {
+        Product product = repository.save(converterDTO.convertToProduct(productDTO));
+        return converterDTO.convertToProductDTO(product);
     }
 
     @Override

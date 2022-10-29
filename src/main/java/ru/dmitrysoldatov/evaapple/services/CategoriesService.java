@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoriesService {
     void deleteById(Integer id);
 
-    void save(CategoriesDTO categoriesDTO);
+    CategoriesDTO save(CategoriesDTO categoriesDTO);
 
     List<CategoriesDTO> findAll();
 

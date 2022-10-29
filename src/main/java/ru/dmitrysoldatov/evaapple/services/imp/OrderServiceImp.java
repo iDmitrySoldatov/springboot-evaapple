@@ -1,6 +1,8 @@
 package ru.dmitrysoldatov.evaapple.services.imp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.dmitrysoldatov.evaapple.convert.ConverterDTO;
 import ru.dmitrysoldatov.evaapple.dto.OrderDTO;
 import ru.dmitrysoldatov.evaapple.models.Order;
@@ -9,7 +11,8 @@ import ru.dmitrysoldatov.evaapple.services.OrderService;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@Transactional(readOnly = true)
 public class OrderServiceImp implements OrderService {
     private OrderRepository repository;
 
@@ -22,13 +25,16 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer id) {
         repository.deleteById(id);
     }
 
     @Override
-    public void save(OrderDTO orderDTO) {
-        repository.save(converterDTO.convertToOrder(orderDTO));
+    @Transactional
+    public OrderDTO save(OrderDTO orderDTO) {
+        Order order = repository.save(converterDTO.convertToOrder(orderDTO));
+        return converterDTO.convertToOrderDTO(order);
     }
 
     @Override
