@@ -1,10 +1,5 @@
 package ru.dmitrysoldatov.evaapple.dto;
-
 import lombok.Data;
-import ru.dmitrysoldatov.evaapple.models.Categories;
-import ru.dmitrysoldatov.evaapple.models.Order;
-
-import javax.persistence.*;
 import java.util.List;
 @Data
 public class ProductDTO {
@@ -17,9 +12,7 @@ public class ProductDTO {
 
     private Double price;
 
-    private Categories categories;
-
-    private List<Order> orderList;
+    private Integer categoriesId;
 
     private List<String> imagesURL;
 }

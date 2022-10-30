@@ -50,8 +50,7 @@ public class ProductController {
             product.setName(productDTO.getName());
             product.setDescription(productDTO.getDescription());
             product.setPrice(productDTO.getPrice());
-            product.setCategories(productDTO.getCategories());
-            product.setOrderList(productDTO.getOrderList());
+            product.setCategoriesId(productDTO.getCategoriesId());
             product.setImagesURL(productDTO.getImagesURL());
 
             ProductDTO upadateProduct = service.save(product);

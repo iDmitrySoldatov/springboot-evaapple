@@ -42,16 +42,16 @@ public class OrderController {
 
     @PutMapping("/order/{id}")
     public ResponseEntity<OrderDTO> updateOrder(@PathVariable Integer id,
-                                                          @RequestBody OrderDTO orderDTO) {
+                                                @RequestBody OrderDTO orderDTO) {
         OrderDTO order = service.findById(id);
         if (order == null) {
             throw new ResourceNotFoundException("Order not exist with id :" + id);
         } else {
-            order.setPhoneNumber(order.getPhoneNumber());
-            order.setClienName(order.getClienName());
-            order.setCity(order.getCity());
-            order.setDateTime(order.getDateTime());
-            order.setProduct(order.getProduct());
+            order.setPhoneNumber(orderDTO.getPhoneNumber());
+            order.setClienName(orderDTO.getClienName());
+            order.setCity(orderDTO.getCity());
+            order.setDateTime(orderDTO.getDateTime());
+            order.setProductId(orderDTO.getProductId());
 
             OrderDTO upadateOrder = service.save(order);
             return ResponseEntity.ok(upadateOrder);

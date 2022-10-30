@@ -1,6 +1,6 @@
 package ru.dmitrysoldatov.evaapple.models;
-
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "Products")
 @Data
+@NoArgsConstructor
 public class Product {
     @Id
     @Column(name = "id")
@@ -27,6 +28,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Categories categories;
+
     @OneToMany(mappedBy = "product")
     private List<Order> orderList;
 

@@ -1,9 +1,7 @@
 package ru.dmitrysoldatov.evaapple.dto;
 
 import lombok.Data;
-import ru.dmitrysoldatov.evaapple.models.Product;
 
-import javax.persistence.*;
 import java.util.Date;
 @Data
 public class OrderDTO {
@@ -18,5 +16,5 @@ public class OrderDTO {
 
     private Date dateTime;
 
-    private Product product;
+    private Integer productId;
 }
