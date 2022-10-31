@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 @Table(name = "Categories")
 @Data
-@NoArgsConstructor
 public class Categories {
     @Id
     @Column(name = "id")

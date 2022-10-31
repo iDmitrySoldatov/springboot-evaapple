@@ -10,6 +10,4 @@ public class CategoriesDTO {
     private String name;
 
     private Integer parentId;
-
-    private String imageURL;
 }
