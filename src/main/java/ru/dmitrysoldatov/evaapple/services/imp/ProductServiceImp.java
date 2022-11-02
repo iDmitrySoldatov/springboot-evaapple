@@ -3,12 +3,14 @@ package ru.dmitrysoldatov.evaapple.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.dmitrysoldatov.evaapple.Image.ImageStorage;
 import ru.dmitrysoldatov.evaapple.convert.ConverterDTO;
 import ru.dmitrysoldatov.evaapple.dto.ProductDTO;
 import ru.dmitrysoldatov.evaapple.models.Product;
 import ru.dmitrysoldatov.evaapple.repositories.ProductRepository;
 import ru.dmitrysoldatov.evaapple.services.ProductService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +19,15 @@ import java.util.Optional;
 public class ProductServiceImp implements ProductService {
 
     private ProductRepository repository;
+
+    private ImageStorage imageStorage;
     private ConverterDTO converterDTO;
 
     @Autowired
-    public ProductServiceImp(ProductRepository repository, ConverterDTO converterDTO) {
+    public ProductServiceImp(ProductRepository repository, ConverterDTO converterDTO, ImageStorage imageStorage) {
         this.repository = repository;
         this.converterDTO = converterDTO;
+        this.imageStorage = imageStorage;
     }
 
     @Override
@@ -41,7 +46,14 @@ public class ProductServiceImp implements ProductService {
     @Override
     public List<ProductDTO> findAll() {
         List<Product> productList = repository.findAll();
-        return converterDTO.convertListToProductDTO(productList);
+
+        List<ProductDTO> productDTOList = new ArrayList<>(productList.size());
+        for (Product product:productList) {
+            ProductDTO productDTO = converterDTO.convertToProductDTO(product);
+            productDTO.setProductURL(imageStorage.getImages("product", product.getId()));
+            productDTOList.add(productDTO);
+        }
+        return productDTOList;
     }
 
     @Override
@@ -49,7 +61,9 @@ public class ProductServiceImp implements ProductService {
         Optional<Product> optionalProduct = repository.findById(id);
         if (!optionalProduct.isEmpty()) {
             Product product = optionalProduct.get();
-            return converterDTO.convertToProductDTO(product);
+            ProductDTO productDTO = converterDTO.convertToProductDTO(product);
+            productDTO.setProductURL(imageStorage.getImages("product", id));
+            return productDTO;
         } else {
             return null;
         }

@@ -52,7 +52,7 @@ public class ProductController {
             product.setDescription(productDTO.getDescription());
             product.setPrice(productDTO.getPrice());
             product.setCategoriesId(productDTO.getCategoriesId());
-            product.setImagesURL(productDTO.getImagesURL());
+            product.setProductURL(productDTO.getProductURL());
 
             ProductDTO upadateProduct = service.save(product);
             return ResponseEntity.ok(upadateProduct);

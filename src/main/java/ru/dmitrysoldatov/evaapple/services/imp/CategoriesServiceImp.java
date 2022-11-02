@@ -3,12 +3,14 @@ package ru.dmitrysoldatov.evaapple.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.dmitrysoldatov.evaapple.Image.ImageStorage;
 import ru.dmitrysoldatov.evaapple.convert.ConverterDTO;
 import ru.dmitrysoldatov.evaapple.dto.CategoriesDTO;
 import ru.dmitrysoldatov.evaapple.models.Categories;
 import ru.dmitrysoldatov.evaapple.repositories.CategoriesRepository;
 import ru.dmitrysoldatov.evaapple.services.CategoriesService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,10 +21,13 @@ public class CategoriesServiceImp implements CategoriesService {
 
     private ConverterDTO converterDTO;
 
+    private ImageStorage imageStorage;
+
     @Autowired
-    public CategoriesServiceImp(CategoriesRepository repository, ConverterDTO converterDTO) {
+    public CategoriesServiceImp(CategoriesRepository repository, ConverterDTO converterDTO, ImageStorage imageStorage) {
         this.repository = repository;
         this.converterDTO = converterDTO;
+        this.imageStorage = imageStorage;
     }
 
     @Override
@@ -41,7 +46,13 @@ public class CategoriesServiceImp implements CategoriesService {
     @Override
     public List<CategoriesDTO> findAll() {
         List<Categories> categoriesList = repository.findAll();
-        return converterDTO.convertListToCategoriesDTO(categoriesList);
+        List<CategoriesDTO> categoriesDTOList = new ArrayList<>(categoriesList.size());
+        for (Categories categories:categoriesList) {
+            CategoriesDTO categoriesDTO = converterDTO.convertToCategoriesDTO(categories);
+            categoriesDTO.setCategoriesURL(imageStorage.getImages("categories", categories.getId()));
+            categoriesDTOList.add(categoriesDTO);
+        }
+        return categoriesDTOList;
     }
 
     @Override
@@ -49,7 +60,9 @@ public class CategoriesServiceImp implements CategoriesService {
         Optional<Categories> optionalCategories = repository.findById(id);
         if (!optionalCategories.isEmpty()) {
             Categories categories = optionalCategories.get();
-            return converterDTO.convertToCategoriesDTO(categories);
+            CategoriesDTO categoriesDTO = converterDTO.convertToCategoriesDTO(categories);
+            categoriesDTO.setCategoriesURL(imageStorage.getImages("categories", id));
+            return categoriesDTO;
         } else {
             return null;
         }

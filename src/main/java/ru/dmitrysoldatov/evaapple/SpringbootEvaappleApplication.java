@@ -21,5 +21,4 @@ public class SpringbootEvaappleApplication {
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
-
 }

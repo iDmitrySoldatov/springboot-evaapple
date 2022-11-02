@@ -14,5 +14,5 @@ public class ProductDTO {
 
     private Integer categoriesId;
 
-    private List<String> imagesURL;
+    private List<String> productURL;
 }
