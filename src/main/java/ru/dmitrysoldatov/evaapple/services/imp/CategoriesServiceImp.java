@@ -3,7 +3,7 @@ package ru.dmitrysoldatov.evaapple.services.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.dmitrysoldatov.evaapple.Image.ImageStorage;
+import ru.dmitrysoldatov.evaapple.services.Image.ImageStorage;
 import ru.dmitrysoldatov.evaapple.convert.ConverterDTO;
 import ru.dmitrysoldatov.evaapple.dto.CategoriesDTO;
 import ru.dmitrysoldatov.evaapple.models.Categories;

@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.*;
 import ru.dmitrysoldatov.evaapple.dto.CategoriesDTO;
 import ru.dmitrysoldatov.evaapple.exception.ResourceNotFoundException;
 import ru.dmitrysoldatov.evaapple.services.CategoriesService;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 public class CategoriesController {
-
     private CategoriesService service;
 
     @Autowired

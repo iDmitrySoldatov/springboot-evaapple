@@ -15,7 +15,6 @@ import java.util.Map;
 @RestController
 public class ProductController {
     private ProductService service;
-
     @Autowired
     public ProductController(ProductService service) {
         this.service = service;
@@ -61,8 +60,8 @@ public class ProductController {
 
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable Integer id) {
-        ProductDTO prduct = service.findById(id);
-        if (prduct == null) {
+        ProductDTO product = service.findById(id);
+        if (product == null) {
             throw new ResourceNotFoundException("Order not exist with id :" + id);
         } else {
             service.deleteById(id);

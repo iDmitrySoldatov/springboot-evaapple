@@ -1,4 +1,4 @@
-package ru.dmitrysoldatov.evaapple.Image;
+package ru.dmitrysoldatov.evaapple.services.Image;
 
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,6 @@ import java.util.List;
 
 @Component
 public class ImageStorageImp implements ImageStorage{
-
     private String path = "/home/dmitry/";
 
     @Override
@@ -33,7 +32,7 @@ public class ImageStorageImp implements ImageStorage{
     }
     @Override
     public void loadImages(String entity, Integer id,String imagesName, byte[] imagesBytes) {
-        Path file = Paths.get(path);
+        Path file = Paths.get(path + entity + "/" + id + "/");
         if (!Files.exists(file)){
             try {
                 Files.createDirectories(file);
@@ -52,7 +51,7 @@ public class ImageStorageImp implements ImageStorage{
     }
     @Override
     public void loadImages(String entity, Integer id,String imagesName, String URL) {
-        Path file = Paths.get(path);
+        Path file = Paths.get(path + entity + "/" + id + "/");
         if(!Files.exists(file)) {
             try {
                 Files.createDirectories(file);
@@ -60,7 +59,7 @@ public class ImageStorageImp implements ImageStorage{
                 throw new RuntimeException(e);
             }
         }
-        Path newFile =Paths.get(path, imagesName + ".jpg");
+        Path newFile =Paths.get(file.toString(), imagesName + ".jpg");
         java.net.URL url = null;
         try {
             url = new URL(URL);
